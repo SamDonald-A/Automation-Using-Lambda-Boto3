@@ -1,4 +1,4 @@
-- Automated Instance Management Using AWS Lambda and Boto3
+Automated Instance Management Using AWS Lambda and Boto3
 Objective: Create a Lambda function that will automatically manage EC2 instances based on their tags.
 
 Boto3 Git Links: https://github.com/SamDonald-A/Frontend-TravelMemory/tree/master 
