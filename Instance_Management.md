@@ -152,10 +152,8 @@ While Creating the Lambda function
 
 
 
+
 Documentation by: Sam Donald A
-
 Email: samdonaldand@gmail.com
-
 GitHub: https://github.com/SamDonald-A
-
 Website: www.samdonald.in
