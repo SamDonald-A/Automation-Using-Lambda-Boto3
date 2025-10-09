@@ -35,33 +35,33 @@ While Creating the Lambda function
 
 
 
-   import boto3
+    import boto3
 
     Credentials for AWS
-   access_Key = 'your-accesskey-from-aws-security-credentials'
-   secret_access_key = 'your-secret-from-aws-security-credentials'
-   aws_region='eu-west-2'
+    access_Key = 'your-accesskey-from-aws-security-credentials'
+    secret_access_key = 'your-secret-from-aws-security-credentials'
+    aws_region='eu-west-2'
     
     Passing the credentials in client
-   response = ec2.describe_instances(
+    response = ec2.describe_instances(
     Filters=[
         {'Name': 'tag:Name', 'Values': ['Sam-Auto-Stop']},
         {'Name': 'instance-state-name', 'Values': ['running', 'stopped']}
     ]
-   )
+    )
  
     To find the Instance that has Tag as Sam-Auto-Start
-   response_2 = ec2.describe_instances(
+    response_2 = ec2.describe_instances(
     Filters=[
         {'Name': 'tag:Name', 'Values': ['Sam-Auto-Start']},
         {'Name': 'instance-state-name', 'Values': ['running', 'stopped']}
     ]
-   )
+    )
 
     Creating the variable
-   sam_auto_stop = None
+    sam_auto_stop = None
     To get the exact Instance's ID
-   for reservation in response['Reservations']:
+    for reservation in response['Reservations']:
     for instance in reservation['Instances']:
         print(instance['InstanceId'], instance.get('Tags'))
          Storing the instance ID in the variable
@@ -73,16 +73,12 @@ While Creating the Lambda function
             InstanceIds=[sam_auto_stop]
         )
 
-   
-
-
-
 
 
     Creating the variable
-   sam_auto_start = None
+    sam_auto_start = None
     To get the exact Instance's ID
-   for reservation in response_2['Reservations']:
+    for reservation in response_2['Reservations']:
     for instance in reservation['Instances']:
         print(instance['InstanceId'], instance.get('Tags'))
          Storing the instance ID in the variable
