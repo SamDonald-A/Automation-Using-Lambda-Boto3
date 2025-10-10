@@ -136,6 +136,14 @@ While Creating the Lambda function
 
 <img width="976" height="474" alt="image" src="https://github.com/user-attachments/assets/6e2690e5-1d83-4ca5-83a0-52ebcd846cf6" />
 
+Step 5: Check the logs from cloudwatch
+
+•	You can see the logs under “log group” in the left side menu and under log stream can find your log stream
+<img width="976" height="481" alt="image" src="https://github.com/user-attachments/assets/7f3219dc-2a7c-42c2-9ea2-0e768c7a8226" />
+
+•	Open log stream to study the logs
+<img width="976" height="483" alt="image" src="https://github.com/user-attachments/assets/058c3ddd-e499-4a61-98e2-582cf73fe5bb" />
+
 
 
 
