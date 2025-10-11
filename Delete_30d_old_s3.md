@@ -141,7 +141,8 @@ only one file is available that is uploaded within the 30 days.
 
 •	Open log stream to study the logs if you need more information
 
-<img width="976" height="483" alt="image" src="https://github.com/user-attachments/assets/056747af-b726-4dd7-b25f-1b14e84f80cb" />
+<img width="976" height="483" alt="image" src="https://github.com/user-attachments/assets/056747af-b726-4dd7-b25f-1b14e84f80cb" /> 
+
 
 
 
