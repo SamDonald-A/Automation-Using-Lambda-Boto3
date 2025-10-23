@@ -183,3 +183,140 @@ Boto3 GitHub Link: https://github.com/SamDonald-A/Automation-Using-Lambda-Boto3/
 
 <img width="975" height="452" alt="image" src="https://github.com/user-attachments/assets/d5391aef-c37f-4cb0-a6b5-3b3e857bcbf8" />
 
+    import boto3
+    import os
+    from datetime import datetime, timedelta, timezone
+
+    access_Key = 'Your Access Key from AWS Security Credentials'
+    secret_access_key = 'Your Secret Access Key from AWS Security Credentials'
+    aws_region='us-east-1'
+
+    # Create Enviroinment Veriables and store the credentials in the Lambda function 
+    SNS_TOPIC_ARN = os.environ.get("SNS_TOPIC_ARN") 
+    THRESHOLD_USD = float(os.environ.get("THRESHOLD_USD"))
+    CURRENCY = os.environ.get("CURRENCY")
+
+    ce = boto3.client('ce', aws_access_key_id=access_Key, aws_secret_access_key=secret_access_key, region_name=aws_region)
+    sns = boto3.client('sns', aws_access_key_id=access_Key, aws_secret_access_key=secret_access_key, region_name=aws_region)
+
+
+    # Getting the Cost from the Cost Explorer
+    def get_cost():
+    today = datetime.now(timezone.utc)
+    start_of_month = today.replace(day=1)
+
+    # To get the recent update from last 24 hours
+    response = ce.get_cost_and_usage(
+        TimePeriod={
+            "Start": start_of_month.strftime("%Y-%m-%d"),
+            "End": today.strftime("%Y-%m-%d")
+        },
+        Granularity="MONTHLY",
+        Metrics=["UnblendedCost"]
+    )
+    # amount variable for fetched result
+    amount = float(response["ResultsByTime"][0]["Total"]["UnblendedCost"]["Amount"])
+    print("Cost Explorer response:", response)
+    return amount
+ 
+    def lambda_handler(event=None, context=None):
+
+    # Conforming we are getting the right data
+    try:
+        amount = get_cost()
+    except Exception as e:
+        print("Error fetching cost:", e)
+        return {"status": "error", "message": str(e)}
+
+    print(f"Current cost: ${amount:.2f} {CURRENCY} | Threshold: ${THRESHOLD_USD:.2f}")
+
+    # Compare the recived amount to the threshold
+    if amount >= THRESHOLD_USD:
+        subject = "AWS Billing Alert — Threshold Exceeded"
+        message = (
+            f"Your estimated AWS charges have exceeded the threshold.\n\n"
+            f"Current Charges: ${amount:.2f} {CURRENCY}\n"
+            f"Threshold: ${THRESHOLD_USD:.2f}\n\n"
+            "This is an automated notification from Your Lambda."
+        )
+        # If amount is greater than or equel to threshold the message will send as an email via SNS
+        try:
+            sns.publish(TopicArn=SNS_TOPIC_ARN, Subject=subject, Message=message)
+            print("SNS alert published.")
+        except Exception as e:
+            print("SNS publish failed:", e)
+        return {"status": "alert_sent", "amount": amount}
+    # If the amount is not greater than or equel to threshold the below code will excecute
+    else:
+        print("Billing is within threshold.")
+        return {"status": "ok", "amount": amount}
+
+•	Deploy the code by clicking the deploy button in the left side of the editor
+
+<img width="975" height="455" alt="image" src="https://github.com/user-attachments/assets/d76298df-7ede-44da-8e45-9a30e4921164" />
+
+•	Now go to the test tab and create the test by giving name and empty Json object and save the test
+
+<img width="975" height="458" alt="image" src="https://github.com/user-attachments/assets/344eb730-747d-4c8e-bb5f-becc8e5513d6" />
+
+•	Click the test button to manually test the lambda function
+•	We see that the lambda successfully ran and return the result
+
+<img width="975" height="455" alt="image" src="https://github.com/user-attachments/assets/7694c2cd-ec0b-4080-b031-b60cbcb21090" />
+
+<img width="975" height="335" alt="image" src="https://github.com/user-attachments/assets/579483b8-e881-4e82-9f1e-4b33e6f54de4" />
+
+•	We can see that in the Cloud watch logGroup to study the logs
+
+<img width="975" height="456" alt="image" src="https://github.com/user-attachments/assets/3c6700f9-6483-4245-a0ab-b6afa1f36663" />
+
+<img width="975" height="452" alt="image" src="https://github.com/user-attachments/assets/95999103-d874-4e6e-b55e-12ea43ea3607" />
+
+•	Mail also received
+
+<img width="975" height="222" alt="image" src="https://github.com/user-attachments/assets/73e660f1-0770-4510-bf8d-6efdb7515d4d" />
+
+<img width="973" height="420" alt="image" src="https://github.com/user-attachments/assets/ba6696c4-a180-4267-bb10-548d490441ce" />
+
+**Step 4: Now let’s setup the EvenBridge amazon service to trigger the lambda daily or hourly**
+
+•	Go to EvenBridge service and click rules under Buses from the left menu
+•	Click create rule
+
+<img width="975" height="455" alt="image" src="https://github.com/user-attachments/assets/d101112c-0ad9-43db-a8de-00f5cc5655e3" />
+
+•	Give a name and select Schedule option and click continue to create rule
+
+<img width="975" height="454" alt="image" src="https://github.com/user-attachments/assets/32436f26-f458-4bf9-9225-0d99206506e0" />
+
+•	This is to define how many minutes (Or Hour or day) once your lambda has to be triggered
+•	For the testing purpose I will give 12 minutes
+
+<img width="975" height="454" alt="image" src="https://github.com/user-attachments/assets/b9199809-5c25-4d7b-859e-671a5a678a3d" />
+
+•	Then Under target select lambda and under function select your lambda function
+
+<img width="975" height="457" alt="image" src="https://github.com/user-attachments/assets/bbe300ea-3184-4ad6-974b-d48d1586e24d" />
+
+•	Leave the default option and click Next
+
+<img width="975" height="455" alt="image" src="https://github.com/user-attachments/assets/d6c95df5-d138-4142-b3d7-17a5a69f8ca3" />
+
+•	Click Next here as well
+
+<img width="975" height="458" alt="image" src="https://github.com/user-attachments/assets/91c61028-234b-4098-bbaa-ed661b111772" />
+
+•	Review and click create rule
+
+<img width="975" height="453" alt="image" src="https://github.com/user-attachments/assets/753d9a25-7a74-46da-b859-598e28f83ff7" />
+
+<img width="975" height="457" alt="image" src="https://github.com/user-attachments/assets/360e5339-3f51-4d50-9a62-90f78264a5b8" />
+
+•	Note the time when the rule is created
+
+<img width="1421" height="705" alt="image" src="https://github.com/user-attachments/assets/1f1cc8f1-280b-4648-82ad-2f5db49ed86e" />
+
+•	After saving the rule we must receive mail within 12 minutes
+•	As expected, Mail also received within 12 minutes
+
+<img width="975" height="237" alt="image" src="https://github.com/user-attachments/assets/1869d8c9-d4ee-426d-a529-25be3173b957" />
