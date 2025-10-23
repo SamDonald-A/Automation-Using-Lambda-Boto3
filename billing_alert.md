@@ -320,3 +320,69 @@ Boto3 GitHub Link: https://github.com/SamDonald-A/Automation-Using-Lambda-Boto3/
 •	As expected, Mail also received within 12 minutes
 
 <img width="975" height="237" alt="image" src="https://github.com/user-attachments/assets/1869d8c9-d4ee-426d-a529-25be3173b957" />
+
+<img width="1420" height="781" alt="image" src="https://github.com/user-attachments/assets/a4a4693a-4668-4071-9ea1-feb256e8a009" />
+
+•	We can see the logs in the CloudWatch logGroups 
+
+<img width="975" height="458" alt="image" src="https://github.com/user-attachments/assets/8cd4c074-520e-4483-a1e8-31505bd3bdc0" />
+
+<img width="1420" height="661" alt="image" src="https://github.com/user-attachments/assets/34f39743-784c-4364-bacd-98ad54e0cf23" />
+
+•	To confirm let’s increase the Schedule time 15 Hours and check the mail inbox after 15 hours
+
+<img width="975" height="456" alt="image" src="https://github.com/user-attachments/assets/15393b81-9f39-454b-82bd-4be87ae6129e" />
+
+•	Leave the default value and click Next
+
+<img width="975" height="458" alt="image" src="https://github.com/user-attachments/assets/e41e82ee-58e9-41b1-8b0d-d1e294a8f5e2" />
+
+<img width="975" height="455" alt="image" src="https://github.com/user-attachments/assets/df2e3b81-c3be-4ed9-924a-d4296737c61c" />
+
+•	So, this rule should trigger the Lambda after 15 Hours, Let’s wait and see
+
+<img width="975" height="484" alt="image" src="https://github.com/user-attachments/assets/d8de6470-86d9-48b5-b285-b8e7f8d19b60" />
+
+•	Note the time when you are saving your changes to the Scheduled Hours
+
+<img width="1423" height="702" alt="image" src="https://github.com/user-attachments/assets/cd0e06a2-e78f-449e-9147-a2313c1f8255" />
+
+•	As we expected the mail is received, Logs also register in CloudWatch
+
+<img width="1423" height="720" alt="image" src="https://github.com/user-attachments/assets/de09f690-f82d-45a6-b598-840a592a6d10" />
+
+•	We see the same price as last night we seen, lets cross check from the AWS console
+
+<img width="1417" height="784" alt="image" src="https://github.com/user-attachments/assets/f7b151bc-a76f-4926-baa9-3e617d32058b" />
+
+•	We see the same price in the AWS console as well
+
+<img width="1421" height="702" alt="image" src="https://github.com/user-attachments/assets/08c02eb2-0976-47b9-8b70-fac85e3135c2" />
+
+<img width="975" height="483" alt="image" src="https://github.com/user-attachments/assets/4b7d2c07-d04a-4e0d-bf3e-9aa7daf695a3" />
+
+<img width="975" height="486" alt="image" src="https://github.com/user-attachments/assets/d99546d6-2fd2-4e07-bf49-d2fc21a004ea" />
+
+•	Lately, I saw Bill was Increased by evening, So I decided to change scheduler to just 15 minutes to confirm it fetching the updated cost by triggering lambda and get it from the AWS Cost Explorer
+
+<img width="1422" height="704" alt="image" src="https://github.com/user-attachments/assets/4fa4b991-9e83-4f20-8f48-36260d865ed1" />
+
+<img width="1423" height="706" alt="image" src="https://github.com/user-attachments/assets/4086681b-6514-420c-b481-6bc0c0ed45a2" />
+
+•	After 30 Minutes I got 2 mails, and successfully got the updated Cost
+
+<img width="1423" height="722" alt="image" src="https://github.com/user-attachments/assets/a0517331-4b15-4c25-a4ac-6bac0eae8315" />
+
+<img width="1346" height="743" alt="image" src="https://github.com/user-attachments/assets/ad22f5a7-6aba-4139-90f6-d2f7ed747b2b" />
+
+
+
+
+Documentation by: Sam Donald A
+
+Email: samdonaldand@gmail.com
+
+GitHub: https://github.com/SamDonald-A
+
+Website: www.samdonald.in
+
