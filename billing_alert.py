@@ -6,7 +6,7 @@ access_Key = 'Your Access Key from AWS Security Credentials'
 secret_access_key = 'Your Secret Access Key from AWS Security Credentials'
 aws_region='us-east-1'
 
-# Create Enviroinmental Veriables and store the credentials in the Lambda function 
+# Create Enviroinment Veriables and store the credentials in the Lambda function 
 SNS_TOPIC_ARN = os.environ.get("SNS_TOPIC_ARN") 
 THRESHOLD_USD = float(os.environ.get("THRESHOLD_USD"))
 CURRENCY = os.environ.get("CURRENCY")
