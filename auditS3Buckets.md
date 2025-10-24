@@ -33,7 +33,7 @@ Boto3 GitHub Links: https://github.com/SamDonald-A/Automation-Using-Lambda-Boto3
 
 <img width="976" height="498" alt="image" src="https://github.com/user-attachments/assets/2598d1b1-0423-4d79-b688-e2d143b0b938" />
 
-Step 2: Create Lambda Function
+# Step 2: Create Lambda Function
 
 •	Click create function and give name and select your runtime
 <img width="976" height="471" alt="image" src="https://github.com/user-attachments/assets/4615014b-6b78-492d-b4e7-2bf655dd4047" />
@@ -116,7 +116,7 @@ Step 2: Create Lambda Function
 
 <img width="937" height="520" alt="image" src="https://github.com/user-attachments/assets/2a6a6397-4c71-4938-9dc6-c97a63f70b7a" />
 
-Step 3: Setup EvenBridge to trigger lambda every day or Hourly
+# Step 3: Setup EvenBridge to trigger lambda every day or Hourly
 
 •	Click Create rule in AWS EvenBridge under rules
 
